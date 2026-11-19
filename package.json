@@ -1,0 +1,14 @@
+{
+  "name": "sitenotes-extension",
+  "version": "1.0.0",
+  "private": true,
+  "description": "SiteNotes — Contextual notes and checklists per website or page in Chrome Side Panel with Markdown export.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "assets": "python3 scripts/generate-assets.py",
+    "package": "node scripts/package.mjs",
+    "build": "npm test && npm run package"
+  },
+  "license": "MIT"
+}

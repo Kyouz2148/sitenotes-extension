@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SiteNotes</title>
+  <link rel="stylesheet" href="sidepanel.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <!-- Top Header -->
+    <header class="topbar">
+      <div class="brand">
+        <img src="../icons/icon32.png" alt="SiteNotes" class="brand-icon" width="22" height="22">
+        <span class="brand-name" data-i18n="appName">SiteNotes</span>
+      </div>
+
+      <div class="topbar-actions">
+        <nav class="view-tabs" role="tablist">
+          <button type="button" class="view-tab active" id="btn-tab-editor" data-view="editor" role="tab" aria-selected="true">
+            <span data-i18n="tabEditor">Current</span>
+          </button>
+          <button type="button" class="view-tab" id="btn-tab-all" data-view="all" role="tab" aria-selected="false">
+            <span id="label-tab-all">All Notes (0)</span>
+          </button>
+        </nav>
+
+        <button type="button" class="icon-btn" id="btn-settings" aria-label="Settings" title="Settings">
+          <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- View 1: Current Context Editor -->
+    <main class="view active" id="view-editor">
+      <!-- Scope Switcher -->
+      <div class="scope-bar">
+        <div class="scope-segmented" role="group" aria-label="Note scope">
+          <button type="button" class="scope-btn active" id="scope-btn-page" data-scope="page">
+            <span class="scope-dot" id="dot-page"></span>
+            <span data-i18n="scopePage">This Page</span>
+          </button>
+          <button type="button" class="scope-btn" id="scope-btn-domain" data-scope="domain">
+            <span class="scope-dot" id="dot-domain"></span>
+            <span data-i18n="scopeDomain">This Site</span>
+          </button>
+          <button type="button" class="scope-btn" id="scope-btn-global" data-scope="global">
+            <span class="scope-dot" id="dot-global"></span>
+            <span data-i18n="scopeGlobal">Scratchpad</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Context Banner (shows active site or detached saved note notice) -->
+      <div class="context-banner" id="context-banner">
+        <div class="context-meta">
+          <span class="context-domain" id="context-domain">example.com</span>
+          <span class="context-path" id="context-path">/</span>
+        </div>
+        <button type="button" class="btn-chip hidden" id="btn-back-to-tab">↩</button>
+      </div>
+
+      <!-- Browser System Page Empty State -->
+      <section class="empty-card hidden" id="browser-page-notice">
+        <div class="empty-icon">🧭</div>
+        <h2 data-i18n="browserPageTitle">Browser System Page</h2>
+        <p data-i18n="browserPageSubtitle">
+          Internal browser pages cannot store page notes. Use Scratchpad or browse all saved notes below.
+        </p>
+        <button type="button" class="btn-primary" id="btn-open-scratchpad" data-i18n="openScratchpad">
+          Open Scratchpad
+        </button>
+      </section>
+
+      <!-- Active Note Workspace -->
+      <section class="editor-card" id="editor-card" data-accent="indigo">
+        <div class="editor-header">
+          <input
+            type="text"
+            id="note-title"
+            class="note-title-input"
+            maxlength="140"
+            data-i18n-placeholder="noteTitlePlaceholder"
+            placeholder="Note title..."
+          >
+          <div class="editor-header-tools">
+            <div class="color-picker" id="color-picker" role="group" aria-label="Accent color">
+              <button type="button" class="color-dot active" data-color="indigo" style="--dot:#4F46E5" aria-label="Indigo"></button>
+              <button type="button" class="color-dot" data-color="emerald" style="--dot:#10B981" aria-label="Emerald"></button>
+              <button type="button" class="color-dot" data-color="amber" style="--dot:#F59E0B" aria-label="Amber"></button>
+              <button type="button" class="color-dot" data-color="rose" style="--dot:#F43F5E" aria-label="Rose"></button>
+              <button type="button" class="color-dot" data-color="sky" style="--dot:#0EA5E9" aria-label="Sky"></button>
+            </div>
+            <button type="button" class="icon-btn pin-btn" id="btn-pin" aria-label="Pin note" title="Pin note">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 17v5"></path>
+                <path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Freeform Notes -->
+        <div class="section-block">
+          <div class="section-label-row">
+            <label for="note-content" class="section-label" data-i18n="notesLabel">Notes</label>
+            <span class="save-status" id="save-status" data-i18n="statusEmpty">Ready</span>
+          </div>
+          <textarea
+            id="note-content"
+            class="note-textarea"
+            rows="6"
+            data-i18n-placeholder="notesPlaceholder"
+            placeholder="Write quick notes, ideas, or snippets for this context..."
+          ></textarea>
+        </div>
+
+        <!-- Checklist -->
+        <div class="section-block checklist-section">
+          <div class="section-label-row">
+            <div class="checklist-title-group">
+              <span class="section-label" data-i18n="checklistLabel">Checklist</span>
+              <span class="progress-pill hidden" id="checklist-progress">0/0</span>
+            </div>
+            <button type="button" class="text-btn hidden" id="btn-clear-completed" data-i18n="clearCompleted">
+              Clear done
+            </button>
+          </div>
+
+          <div class="progress-track hidden" id="checklist-progress-track">
+            <div class="progress-fill" id="checklist-progress-fill"></div>
+          </div>
+
+          <ul class="checklist-list" id="checklist-list"></ul>
+
+          <form class="checklist-add-form" id="checklist-form">
+            <input
+              type="text"
+              id="checklist-input"
+              class="checklist-input"
+              maxlength="240"
+              data-i18n-placeholder="addChecklistPlaceholder"
+              placeholder="Add a task and press Enter..."
+            >
+            <button type="submit" class="btn-secondary" id="btn-add-task" data-i18n="addTaskBtn">Add</button>
+          </form>
+        </div>
+
+        <!-- Editor Footer Actions -->
+        <div class="editor-footer">
+          <div class="footer-left">
+            <button type="button" class="btn-ghost" id="btn-copy-md">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span data-i18n="copyMarkdown">Copy MD</span>
+            </button>
+            <button type="button" class="btn-ghost" id="btn-download-md">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              <span data-i18n="downloadMarkdown">Export .md</span>
+            </button>
+          </div>
+          <button type="button" class="icon-btn danger-btn" id="btn-delete-note" title="Delete note" aria-label="Delete note">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+            </svg>
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <!-- View 2: All Notes Browser -->
+    <main class="view" id="view-all">
+      <div class="search-box">
+        <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="search"
+          id="search-input"
+          class="search-input"
+          data-i18n-placeholder="searchPlaceholder"
+          placeholder="Search notes, sites, or tasks..."
+        >
+      </div>
+
+      <div class="filter-pills" id="filter-pills">
+        <button type="button" class="filter-pill active" data-filter="all" data-i18n="filterAll">All</button>
+        <button type="button" class="filter-pill" data-filter="pinned" data-i18n="filterPinned">Pinned</button>
+        <button type="button" class="filter-pill" data-filter="domain" data-i18n="filterDomain">Sites</button>
+        <button type="button" class="filter-pill" data-filter="page" data-i18n="filterPage">Pages</button>
+      </div>
+
+      <div class="notes-list" id="notes-list"></div>
+
+      <div class="empty-card hidden" id="all-notes-empty">
+        <div class="empty-icon">📝</div>
+        <h2 id="all-empty-title" data-i18n="noNotesTitle">No saved notes yet</h2>
+        <p id="all-empty-subtitle" data-i18n="noNotesSubtitle">
+          Start typing on any website or right-click highlighted text to save it to SiteNotes.
+        </p>
+      </div>
+    </main>
+
+    <!-- Settings Drawer / Modal -->
+    <div class="modal-backdrop hidden" id="settings-modal" role="dialog" aria-modal="true" aria-labelledby="settings-heading">
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <h2 id="settings-heading" data-i18n="settingsTitle">Settings & Backup</h2>
+          <button type="button" class="icon-btn" id="btn-close-settings" aria-label="Close">✕</button>
+        </div>
+
+        <div class="modal-body">
+          <div class="setting-row">
+            <label for="setting-theme" data-i18n="themeLabel">Appearance</label>
+            <select id="setting-theme" class="select-control">
+              <option value="system" data-i18n="themeSystem">System</option>
+              <option value="light" data-i18n="themeLight">Light</option>
+              <option value="dark" data-i18n="themeDark">Dark</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <label for="setting-language" data-i18n="languageLabel">Language</label>
+            <select id="setting-language" class="select-control">
+              <option value="auto" data-i18n="languageAuto">Auto (Browser)</option>
+              <option value="pt" data-i18n="languagePt">Português</option>
+              <option value="en" data-i18n="languageEn">English</option>
+            </select>
+          </div>
+
+          <div class="setting-row">
+            <label for="setting-default-scope" data-i18n="defaultScopeLabel">Default tab scope</label>
+            <select id="setting-default-scope" class="select-control">
+              <option value="page" data-i18n="scopePage">This Page</option>
+              <option value="domain" data-i18n="scopeDomain">This Site</option>
+              <option value="global" data-i18n="scopeGlobal">Scratchpad</option>
+            </select>
+          </div>
+
+          <div class="backup-actions">
+            <button type="button" class="btn-secondary full-width" id="btn-export-backup" data-i18n="backupExportBtn">
+              Export Backup (.json)
+            </button>
+            <button type="button" class="btn-secondary full-width" id="btn-import-backup" data-i18n="backupImportBtn">
+              Import Backup (.json)
+            </button>
+            <input type="file" id="file-import-backup" accept="application/json,.json" class="hidden">
+          </div>
+
+          <div class="privacy-footer">
+            <p data-i18n="privacyBadge">100% local & private — zero tracking, no external servers.</p>
+            <span class="shortcut-badge" data-i18n="shortcutHint">Shortcut: Alt+Shift+N</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>

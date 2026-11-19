@@ -1,0 +1,26 @@
+{
+  "extName": {
+    "message": "SiteNotes — Notes & Checklists per Website",
+    "description": "Extension name shown in Chrome Web Store and extensions page."
+  },
+  "extDescription": {
+    "message": "Keep contextual notes and checklists for every website or page in Chrome's Side Panel, with instant search and Markdown export.",
+    "description": "Extension short description (<= 132 chars)."
+  },
+  "actionTitle": {
+    "message": "Open SiteNotes Side Panel",
+    "description": "Tooltip for toolbar action icon."
+  },
+  "commandOpenDesc": {
+    "message": "Open SiteNotes Side Panel",
+    "description": "Keyboard shortcut description."
+  },
+  "contextMenuSaveSelection": {
+    "message": "Save selection to SiteNotes",
+    "description": "Context menu label for saving selected text to the current page note."
+  },
+  "contextMenuSaveSelectionDomain": {
+    "message": "Save selection to Domain Note",
+    "description": "Context menu label for saving selected text to the domain note."
+  }
+}

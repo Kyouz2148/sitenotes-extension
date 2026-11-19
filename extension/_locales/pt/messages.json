@@ -1,0 +1,26 @@
+{
+  "extName": {
+    "message": "SiteNotes — Notas e Checklists por Site",
+    "description": "Nome da extensão exibido na Chrome Web Store e na página de extensões."
+  },
+  "extDescription": {
+    "message": "Guarde notas e checklists por site ou página no Painel Lateral do Chrome, com pesquisa rápida e exportação Markdown.",
+    "description": "Descrição curta da extensão (<= 132 caracteres)."
+  },
+  "actionTitle": {
+    "message": "Abrir Painel Lateral do SiteNotes",
+    "description": "Dica ao passar o mouse sobre o ícone da barra."
+  },
+  "commandOpenDesc": {
+    "message": "Abrir Painel Lateral do SiteNotes",
+    "description": "Descrição do atalho de teclado."
+  },
+  "contextMenuSaveSelection": {
+    "message": "Guardar seleção no SiteNotes (esta página)",
+    "description": "Menu de contexto para guardar texto selecionado na nota da página."
+  },
+  "contextMenuSaveSelectionDomain": {
+    "message": "Guardar seleção na nota deste site",
+    "description": "Menu de contexto para guardar texto selecionado na nota do domínio."
+  }
+}
